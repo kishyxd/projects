@@ -2,7 +2,7 @@
 
 Personal projects, services, and infrastructure built by KXVN.
 
-Featured hub: kxvn.io — personal landing page and entry point to everything below.
+Featured hub: **[kxvn.io](https://kxvn.io)** — personal landing page and entry point to everything below.
 
 Self-hosted on a Linux VPS behind Nginx + Cloudflare, accessed remotely over Tailscale.
 
