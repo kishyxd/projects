@@ -8,6 +8,19 @@ Self-hosted on a Linux VPS behind Nginx + Cloudflare, accessed remotely over Tai
 
 ---
 
+## ⚙️ System Acronyms
+
+> Every project here ships with a corporate-sounding acronym so it sounds like a Fortune 500 product, not a homelab. 😏
+
+| System | Acronym | Stands For | What It Actually Is |
+|---|---|---|---|
+| **HERMIT** | `H.E.R.M.I.T.` | **H**ome **E**fficient **R**esearch **M**anagement & **I**nformation **T**ransit | The core AI gateway, automation, and management layer tying the whole stack together. |
+| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Tdarr, Jellyfin, Prowlarr, qBittorrent. "Perfectly legal." 🤫 |
+
+*Composed by an insufferably truthful machine.* :3
+
+---
+
 ## 🌟 Featured
 
 | Project | Description | Stack |
