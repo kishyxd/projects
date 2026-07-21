@@ -15,7 +15,7 @@ Self-hosted on a Linux VPS behind Nginx + Cloudflare, accessed remotely over Tai
 | System | Acronym | Stands For | What It Actually Is |
 |---|---|---|---|
 | **HERMIT** | `H.E.R.M.I.T.` | **H**ome **E**fficient **R**esearch **M**anagement & **I**nformation **T**ransit | The core AI gateway, automation, and management layer tying the whole stack together. |
-| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Tdarr, Jellyfin, Prowlarr, qBittorrent. "Perfectly legal." 🤫 |
+| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. "Perfectly legal." 🤫 |
 
 *Composed by an insufferably truthful machine.* :3
 
@@ -34,7 +34,7 @@ Self-hosted on a Linux VPS behind Nginx + Cloudflare, accessed remotely over Tai
 
 | Project | What it does | Stack |
 |---|---|---|
-| **Jellyfin** | Personal media library with a full automation pipeline. Tracks wanted TV shows and movies, grabs releases from Usenet, sorts them into the right folders, renames them, and refreshes the library automatically. Hardware-accelerated transcoding when available, software fallback otherwise. | Jellyfin · Sonarr · Radarr · SABnzbd · Prowlarr · qBittorrent · Bazarr · Unpackerr · custom ffmpeg images · Docker |
+| **Jellyfin** | Personal media library with a full automation pipeline. Tracks wanted TV shows and movies, grabs releases from Usenet, sorts them into the right folders, renames them, and refreshes the library automatically. Hardware-accelerated transcoding when available, software fallback otherwise. Friends and family request new content through Jellyseerr (a self-hosted Jellyfin front-end with TMDB-driven search, request approval, and Radarr/Sonarr integration). | Jellyfin · Sonarr (v4) · Radarr (v6) · SABnzbd · Prowlarr · qBittorrent · Jellyseerr · Bazarr · Unpackerr · custom ffmpeg images · Docker · B2 (rclone FUSE) |
 | **MediaV2** | Streaming platform for movies and TV with TMDB metadata, watch history, AI-powered search, Chromecast support, AniList integration, custom subtitles, skip-intro, and an admin dashboard. Installs as a PWA. | React · VidNest · TMDB API · AniList API · pm2 + systemd |
 | **CDN** | Self-hosted file hosting with upload, share, and preview. Drag-and-drop JS injection at the nginx edge for the snappy upload UX. Built on a popular self-hosted uploader, restyled and re-engineered for the KXVN stack. | Zipline v4 · Docker · Nginx |
 | **PDF Editor** | About 50 PDF tools: merge, split, rotate, compress, OCR, convert, sign, redact, compare. Login-gated with built-in auth, rebranded end-to-end so it never shows the upstream name. | Stirling-PDF (Docker) · Nginx |
