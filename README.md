@@ -54,41 +54,87 @@ Hosted on a single Linux VPS behind Nginx + Tailscale, with everything orchestra
 
 ---
 
-## 🛠 Apps & Tools
+## 🛰️ Live Service Map (today)
 
-| Project | What it does | Stack |
+> Every container that actually answers the door. Grouped by what they do, not where their repo lives.
+
+### 🎬 Media — P.I.R.A.T.E.
+
+| Container | What it does | Stack |
 |---|---|---|
-| **Jellyfin** | Personal media library with a full automation pipeline. Tracks wanted TV shows and movies, grabs releases from Usenet, sorts them into the right folders, renames them, and refreshes the library automatically. Hardware-accelerated transcoding when available, software fallback otherwise. Friends and family request new content through Jellyseerr (a self-hosted Jellyfin front-end with TMDB-driven search, request approval, and Radarr/Sonarr integration). | Jellyfin · Sonarr (v4) · Radarr (v6) · SABnzbd · Prowlarr · qBittorrent · Jellyseerr · Bazarr · Unpackerr · custom ffmpeg images · Docker · B2 (rclone FUSE) |
-| **MediaV2** | Streaming platform for movies and TV with TMDB metadata, watch history, AI-powered search, Chromecast support, AniList integration, custom subtitles, skip-intro, and an admin dashboard. Installs as a PWA. | React · VidNest · TMDB API · AniList API · pm2 + systemd |
-| **CDN** | Self-hosted file hosting with upload, share, and preview. Drag-and-drop JS injection at the nginx edge for the snappy upload UX. Built on a popular self-hosted uploader, restyled and re-engineered for the KXVN stack. | Zipline v4 · Docker · Nginx |
-| **PDF Editor** | About 50 PDF tools: merge, split, rotate, compress, OCR, convert, sign, redact, compare. Login-gated with built-in auth, rebranded end-to-end so it never shows the upstream name. | Stirling-PDF (Docker) · Nginx |
-| **KXVN Trades** | LLM-driven trading research. Natural-language prompts trigger multi-agent debate over market data and return a paper-trade plan. Paper-only by design — no broker keys, no real-money execution. Rebranded from an upstream project. | FastAPI · React 19 · Vite · Tailwind · ECharts · Ollama Cloud · Nginx |
-| **Collectr-Price** | Pokémon TCG price scraper and calculator. Search by name, pulls pricing from Collectr, shows grade and rarity, links out to listings. | Python |
-| **Discord Bot** | Universal bot starter: message + slash commands + HTTP app API. AI chat integration, gambling mini-games, reminders, Spotify controls, polls, home-automation hooks, and a live stats dashboard. | Node.js · Discord.js · pm2 |
-| **IPTV Live** | Browse 9,000+ free live TV channels by country and category, HLS playback in the browser, backend Express proxy for CORS-free streaming. Local-only by design — not exposed publicly. | React 19 · Vite · hls.js · Express · iptv-org API |
-| **Homeserver** | Infrastructure and deployment templates: Docker Compose files, Nginx site configs, firewall rules, lockdown scripts, an inventory of what's running, and runbooks for migrations. | Docker · Nginx · Bash |
+| **Sonarr** | TV show brain. Tracks wanted episodes, picks best release, hands off to downloaders. Per-episode first, season packs only as fallback. | Sonarr v4 · Docker |
+| **Radarr** | Movie twin of Sonarr. Same automation, no season logic. | Radarr v6 · Docker |
+| **Prowlarr** | Single pane of glass over every indexer. One config change syncs to Sonarr + Radarr. | Prowlarr · Docker |
+| **SABnzbd** | Usenet client. Does the PAR2/RAR work and hands clean files to Sonarr/Radarr. | SABnzbd · Docker |
+| **qBittorrent** | Torrent client. Sidecar for grabs SABnzbd won't find. | qBittorrent · Docker |
+| **Jellyfin** | The playback server. Streams straight to phone, browser, TV. Hardware-accel transcoding when available. | Jellyfin · custom ffmpeg · Docker |
+| **Jellyseerr** | Friend-facing request UI. TMDB-backed search + approval flow + auto-webhook back to "Available". | Jellyseerr · Docker |
+| **Tdarr** | Distributed transcode farm. One server + one worker, ready when a heavy batch comes through. | Tdarr · Docker |
 
----
+Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclone FUSE` mounted at `/home/ai/mnt/kxvn-b2`. Local disk only sees boot files and `~/.cache/rclone`.
 
-## 🤖 AI Layer (private)
+### 🧰 Productivity & Web
 
-| Service | Role |
+| Container | Domain | What it does |
+|---|---|---|
+| **Zipline (CDN)** | `<cdn>` | Self-hosted file host with drag-and-drop upload and shareable links. Restyled, no upstream branding. |
+| **Stirling-PDF** | `<pdf>` | 50+ PDF tools — merge, split, OCR, redact, sign. Login-gated, fully rebranded. |
+| **KXVN Trades** | `<trading>` | Paper-mode LLM trading research. Multi-agent debate returns a plan, never executes. |
+| **kxvn.io landing** | `kxvn.io` | Splash page — audio gate, Lanyard Discord presence, Spotify now-playing, mute controls. |
+| **docs / graphs / master-control** | various | Internal dashboards and admin tools. Tailscale-only. |
+
+### 👀 Operations & Observability
+
+| Container | What it does |
 |---|---|
-| **Hermes Agent** | Multi-platform gateway: Discord, Telegram, WhatsApp, SMS, web |
-| **GBrain** | Personal knowledge graph (PGLite, embedded embeddings) — Hermes's long-term memory |
-| **CodeGraph** | Code structure index, queryable via MCP — lets the agent read its own code |
-| **Ollama** | Local model server on the host, with cloud fallback for bigger jobs |
+| **Uptime Kuma** | 24/7 health monitor across every public service. Sends pings to Discord on incident. |
+| **Portainer** | Docker management UI. Backup plan when Hermes is asleep. |
+| **Glances** | System-wide host metrics: CPU, RAM, disk, network, container breakdown. |
+| **ntfy** | Self-hosted push notifications. The webhook target every cron'd job, watcher, and watchdog uses. |
 
-### 🧠 How it actually thinks
+### 📡 Fun & Quick Tools
 
-Every service on the box is something Hermes can reach. Send it a Discord message saying *"grab Daredevil: Born Again"* and it:
+| Container | What it does |
+|---|---|
+| **Pairdrop** | Local-only, zero-trust AirDrop substitute. Drag a file across browsers on the same LAN. |
+| **Filebrowser** | Web UI for the working directory on the box. Quick drag, download, upload. |
+| **Glance** | Personal home-dashboard. RSS, weather, GitHub, weather, one panel at a time. |
+| **Spotify Now Bridge** | Tells the splash page what you're listening to. |
+| **Rustdesk (hbbs + hbbr)** | Self-hosted remote desktop. Your own TeamViewer with no third party in the loop. |
+| **LiveKit** | Voice/video server used by Voice-channel sessions in Hermes. |
 
-1. Asks Jellyseerr if it's already requested — if yes, just confirms.
-2. Asks Sonarr if it's already in the library (and which seasons).
-3. If not, fires a Sonarr search, lets Prowlarr hit the indexers, picks the best release under the [release rules](#-apps--tools).
-4. Watches the queue, the storage, the FUSE mount, the webhook back to Jellyseerr — and fixes each silent break in turn.
+### 🏠 Physical Layer
 
-Hermit doesn't touch the quality profiles or the user's watch history. It owns the boring middle 95% — mounts, scrapes, queue monitoring, library-ID drift, status mismatches.
+| Device | What it does |
+|---|---|
+| **Home Assistant** | Smart-home hub. Lights, switches, scenes, the PC power plug, all behind one fabric. |
+| **PC (windows box)** | Upload station — runs SAB/Stirling/Rustdesk clients, ships bandwidth in and out of the box. |
+
+### 🗺️ How it all threads together
+
+```
+                          You (Discord · Telegram · SMS · Voice · Web)
+                                       │
+                                       ▼
+                            ┌─────── Hermit ────────┐
+                            │       (agent)        │
+                            │   - watches queues   │
+                            │   - fixes FUSE bind  │
+                            │   - alerts via ntfy  │
+                            └────────────┬─────────┘
+                                         │
+   ┌──────────── P.I.R.A.T.E. ────────────┼──────────── Productivity ────────────┐
+   │                                     ▼                                        │
+Sonarr/Radarr ──► Prowlarr ──► SABnzbd / qBittorrent ──► /downloads/ → Sonarr/Radarr ──► import
+   │                                                                      │
+   ▼                                                                      ▼
+Jellyfin  ◄──── webhook ◄──── Jellyseerr                            Tdarr (transcode)
+   │
+   ▼  streams
+You watching the show
+```
+
+Hermit sits on the same wire as every one of these. A "grab Daredevil" message becomes: **Jellyseerr check → Sonarr search → queue watch → mount bounce → NFO fixup → status reap** — all without you touching the keyboard again.
 
 ---
 
@@ -101,8 +147,6 @@ Hermit doesn't touch the quality profiles or the user's watch history. It owns t
 | `kishyxd/homeserver` | Private | Infra templates + runbooks |
 | `kishyxd/pdf` | Private | PDF editor project |
 | `kishyxd/kxvn-site` | Private | The kxvn.io landing page source |
-
----
 
 🔒 *Source code for every project is private. This repo is the public showcase.*
 
