@@ -142,17 +142,19 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 | User-facing service | URL | What it does |
 |---|---|---|
 | **Landing page** | [kxvn.io](https://kxvn.io) | Front door. Splash, avatar, audio gate. |
-| **Emby (play)** | [play.kxvn.io](https://play.kxvn.io) | The main media server. Browse, watch, manage. |
-| **Emby (alt)** | [emby.kxvn.io](https://emby.kxvn.io) | Emby on a different subdomain. Same server. |
-| **Jellyseerr (request)** | [request.kxvn.io](https://request.kxvn.io) | Request new titles. Clean URL. |
-| **Jellyseerr (alt)** | [jellyseerr.kxvn.io](https://jellyseerr.kxvn.io) | Same as above, older URL. |
-| **KXVN Streams** | [media.kxvn.io](https://media.kxvn.io) | Browse new releases via TMDB. Independent from Emby. |
+| **FTV (Emby)** | [play.kxvn.io](https://play.kxvn.io) | The main media server. Browse, watch, manage. |
+| **Request** | [request.kxvn.io](https://request.kxvn.io) | Request new titles. Clean URL. |
+| **Media catalog** | [media.kxvn.io](https://media.kxvn.io) | Browse new releases via TMDB. Independent from FTV. |
 | **Docs** | [docs.kxvn.io](https://docs.kxvn.io) | User-facing docs for the media stack. |
+| **Dashboard** | [dashboard.kxvn.io](https://dashboard.kxvn.io) | Glance-based service catalog. Login-gated. |
 | **Sonarr / Radarr / SABnzbd / Prowlarr** | [jelly.kxvn.io/sonarr/](https://jelly.kxvn.io/sonarr/) etc. | Admin UI. Tailnet-gated. |
-| **Discord webhook** | Discord | Private family-server bridge. |
+| **Discord bot** | Discord | Family server bridge. 12 visible slash commands. |
 
 ## Recent changes
 
+- **2026-08-13** — Discord bot got a `/media` and `/stat` dashboard (movies · series · episodes + size on disk + last 3 added). Auto-delete-after-30s on every command except `/media` and `/stat` so the bot doesn't litter channels.
+- **2026-08-13** — `/collections` now shows live "X/Y in library" counts in search results (was just listing total movies).
+- **2026-08-13** — Glance (dashboard.kxvn.io) rewritten: two pages — Home (system stats + monitors) and Services (every public link grouped by purpose). All current kxvn.io links; stale "Jellyfin" replaced with FTV / play.kxvn.io / jelly.kxvn.io/{sonarr,radarr,sabnzbd,prowlarr}.
 - **2026-08-12** — Migrated Jellyfin → Emby. Emby Premiere adds 4K HDR direct-play, mobile apps, sync, plugins. Jellyseerr fully wired to Emby. New clean URLs: `play.kxvn.io` (Emby) and `request.kxvn.io` (Jellyseerr). Old Jellyfin/Moonfin stopped, not deleted (snapshots at `/home/ai/backups/jellyfin-pre-emblify-20260812-075424`).
 - **2026-08-12** — Unified notifications: rolled-up/completion semantics over per-event spam.
 - **2026-08-12** — Sonarr/Radarr minimumAge set to 500 days (skip ancient encodes).
@@ -171,6 +173,11 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 | `kishyxd/homeserver` | Private | Infra templates + runbooks |
 | `kishyxd/pdf` | Private | PDF editor project |
 | `kishyxd/kxvn-site` | Private | The kxvn.io landing page source |
+| `kishyxd/discordbot` | Private | The KXVN Discord bot + slash commands (12 visible, 24 hidden) |
+| `kishyxd/discord-bot-dashboard` | Private | Next.js admin panel for the bot |
+| `kishyxd/iptv-live` | Private | IPTV playlist proxy + search (iptv.kxvn.io) |
+| `kishyxd/collectr-price` | Private | Pokémon TCG price tracker |
+| `kishyxd/mediav2` | Private | The media.kxvn.io PWA |
 
 🔒 *Source code for every project is private. This repo is the public showcase.*
 
