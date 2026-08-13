@@ -144,7 +144,7 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 | **Landing page** | [kxvn.io](https://kxvn.io) | Front door. Splash, avatar, audio gate. |
 | **FTV (Emby)** | [play.kxvn.io](https://play.kxvn.io) | The main media server. Browse, watch, manage. |
 | **Request** | [request.kxvn.io](https://request.kxvn.io) | Request new titles. Clean URL. |
-| **Media catalog** | [media.kxvn.io](https://media.kxvn.io) | Browse new releases via TMDB. Independent from FTV. |
+| **Media stream** | [media.kxvn.io](https://media.kxvn.io) | Browse new releases via TMDB. Independent from FTV. |
 | **Docs** | [docs.kxvn.io](https://docs.kxvn.io) | User-facing docs for the media stack. |
 | **Dashboard** | [dashboard.kxvn.io](https://dashboard.kxvn.io) | Glance-based service catalog. Login-gated. |
 | **Sonarr / Radarr / SABnzbd / Prowlarr** | [jelly.kxvn.io/sonarr/](https://jelly.kxvn.io/sonarr/) etc. | Admin UI. Tailnet-gated. |
