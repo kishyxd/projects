@@ -174,7 +174,7 @@ Service endpoints, request tools, admin panels, and implementation details are k
 | `kishyxd/discordbot` | Private | The KXVN Discord bot + slash commands (12 visible, 24 hidden) |
 | `kishyxd/iptv-live` | Private | IPTV playlist proxy + search |
 | `kishyxd/collectr-price` | Private | Pokémon TCG price tracker |
-| `kishyxd/mediav2` | Private | The media.kxvn.io PWA |
+| `kishyxd/mediav2` | Private | Media discovery PWA |
 
 🔒 *Source code for every project is private. This repo is the public showcase.*
 
