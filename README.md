@@ -33,13 +33,13 @@ Hosted on a single Linux VPS behind Nginx + Tailscale, with everything orchestra
 | System | Acronym | Stands For | What It Actually Is |
 |---|---|---|---|
 | **HERMIT** | `H.E.R.M.I.T.` | **H**ome **E**fficient **R**esearch **M**anagement & **I**nformation **T**ransit | The core AI gateway, automation, and management layer tying the whole stack together. |
-| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Emby, Prowlarr, qBittorrent, Jellyseerr. "Perfectly legal." 🤫 |
+| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. "Perfectly legal." 🤫 |
 
 *Composed by an insufferably truthful machine.* :3
 
 ---
 
-> 🎬 *[GIF SLOT — drop a quick screen-record of "Hermit, grab Daredevil" → show appears in Emby here]*
+> 🎬 *[GIF SLOT — drop a quick screen-record of "Hermit, grab Daredevil" → show appears in FTV Media here]*
 
 ---
 
@@ -67,7 +67,7 @@ Hosted on a single Linux VPS behind Nginx + Tailscale, with everything orchestra
 | **Prowlarr** | Single pane of glass over every indexer. One config change syncs to Sonarr + Radarr. | Prowlarr · Docker |
 | **SABnzbd** | Usenet client. Does the PAR2/RAR work and hands clean files to Sonarr/Radarr. | SABnzbd · Docker |
 | **qBittorrent** | Torrent client. Sidecar for grabs SABnzbd won't find. | qBittorrent · Docker |
-| **Emby** | The playback server. Streams straight to phone, browser, TV. Hardware-accel transcoding. Premiere enables 4K HDR direct-play, mobile apps, sync, and plugins. | Emby · v4.9.5.0 · Premiere · Docker |
+| **Jellyfin** | Synchronized companion playback server. Provides backup web access and the proper native clients for phones, TVs, computers, and media centers. | Jellyfin · Docker |
 | **Jellyseerr** | Friend-facing request UI. TMDB-backed search + approval flow + auto-webhook back to "Available". | Jellyseerr · v3.4.1 · Docker |
 | **Tdarr** | Distributed transcode farm. One server + one worker, ready when a heavy batch comes through. | Tdarr · Docker |
 
@@ -128,34 +128,32 @@ Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclo
 Sonarr/Radarr ──► Prowlarr ──► SABnzbd / qBittorrent ──► /downloads/ → Sonarr/Radarr ──► import
    │                                                                      │
    ▼                                                                      ▼
-Emby  ◄──── webhook ◄──── Jellyseerr                            Tdarr (transcode)
+Jellyfin ◄──── webhook ◄──── Jellyseerr                            Tdarr (transcode)
    │
    ▼  streams
 You watching the show
 ```
 
-Hermit sits on the same wire as every one of these. A "grab Daredevil" message becomes: **Jellyseerr check → Sonarr search → queue watch → mount bounce → NFO fixup → status reap** — all without you touching the keyboard again.
+Hermit sits on the same wire as every one of these. A "grab Daredevil" message becomes: **Jellyseerr check → Sonarr search → queue watch → mount bounce → NFO fixup → status reap** — all without you touching the keyboard again. FTV Media is the user-facing media service; Silo and Jellyfin share accounts, passwords, libraries, and watch history.
 
 
 ## 🌐 Public entry points
 
-| User-facing service | URL | What it does |
-|---|---|---|
-| **Landing page** | [kxvn.io](https://kxvn.io) | Front door. Splash, avatar, audio gate. |
-| **FTV (Emby)** | [play.kxvn.io](https://play.kxvn.io) | The main media server. Browse, watch, manage. |
-| **Seerr** | [request.kxvn.io](https://request.kxvn.io) | Jellyseerr — friend-facing request UI. TMDB-backed search + approval flow. |
-| **Media stream** | [media.kxvn.io](https://media.kxvn.io) | Browse new releases via TMDB. Independent from FTV. |
-| **Docs** | [docs.kxvn.io](https://docs.kxvn.io) | User-facing docs for the media stack. |
-| **Dashboard** | [dashboard.kxvn.io](https://dashboard.kxvn.io) | Glance-based service catalog. Login-gated. |
-| **Sonarr / Radarr / SABnzbd / Prowlarr** | [jelly.kxvn.io/sonarr/](https://jelly.kxvn.io/sonarr/) etc. | Admin UI. Tailnet-gated. |
-| **Discord bot** | Discord | Family server bridge. 12 visible slash commands. |
+The public project showcase intentionally exposes only the two canonical front doors:
+
+| Public link | What it does |
+|---|---|
+| [kxvn.io](https://kxvn.io) | Public landing page and front door. |
+| [docs.kxvn.io](https://docs.kxvn.io) | Public documentation hub, including the FTV Media guide. |
+
+Service endpoints, request tools, admin panels, and implementation details are kept out of this public README. Use the documentation hub for current user guidance.
 
 ## Recent changes
 
 - **2026-08-13** — Discord bot got a `/media` and `/stat` dashboard (movies · series · episodes + size on disk + last 3 added). Auto-delete-after-30s on every command except `/media` and `/stat` so the bot doesn't litter channels.
 - **2026-08-13** — `/collections` now shows live "X/Y in library" counts in search results (was just listing total movies).
-- **2026-08-13** — Glance (dashboard.kxvn.io) rewritten: two pages — Home (system stats + monitors) and Services (every public link grouped by purpose). All current kxvn.io links; stale "Jellyfin" replaced with FTV / play.kxvn.io / jelly.kxvn.io/{sonarr,radarr,sabnzbd,prowlarr}.
-- **2026-08-12** — Migrated Jellyfin → Emby. Emby Premiere adds 4K HDR direct-play, mobile apps, sync, plugins. Jellyseerr fully wired to Emby. New clean URLs: `play.kxvn.io` (Emby) and `request.kxvn.io` (Jellyseerr). Old Jellyfin/Moonfin stopped, not deleted (snapshots at `/home/ai/backups/jellyfin-pre-emblify-20260812-075424`).
+- **2026-08-15** — FTV Media account documentation synchronized across Silo, Jellyfin, Jellyseerr, Discord, and this showcase. Jellyseerr uses Jellyfin authentication; Silo and Jellyfin password changes mirror in both directions, and watch history stays synchronized.
+- **2026-08-15** — Public-link cleanup: this README now exposes only `kxvn.io` and `docs.kxvn.io`. Service-specific links belong in the user documentation, not the public project showcase.
 - **2026-08-12** — Unified notifications: rolled-up/completion semantics over per-event spam.
 - **2026-08-12** — Sonarr/Radarr minimumAge set to 500 days (skip ancient encodes).
 - **2026-08-12** — Radarr Anime profile created (mirrors Sonarr anime structure).
@@ -174,11 +172,10 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 | `kishyxd/pdf` | Private | PDF editor project |
 | `kishyxd/kxvn-site` | Private | The kxvn.io landing page source |
 | `kishyxd/discordbot` | Private | The KXVN Discord bot + slash commands (12 visible, 24 hidden) |
-| `kishyxd/discord-bot-dashboard` | Private | Next.js admin panel for the bot |
-| `kishyxd/iptv-live` | Private | IPTV playlist proxy + search (iptv.kxvn.io) |
+| `kishyxd/iptv-live` | Private | IPTV playlist proxy + search |
 | `kishyxd/collectr-price` | Private | Pokémon TCG price tracker |
 | `kishyxd/mediav2` | Private | The media.kxvn.io PWA |
 
 🔒 *Source code for every project is private. This repo is the public showcase.*
 
-See them all live at **[kxvn.io](https://kxvn.io)**.
+See the public project hub at **[kxvn.io](https://kxvn.io)** or read the current guides at **[docs.kxvn.io](https://docs.kxvn.io)**.
