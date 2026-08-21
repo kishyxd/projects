@@ -2,11 +2,9 @@
 
 > **One VPS. Nine services. One agent that runs the show.**
 
-🌐 **[kxvn.io](https://kxvn.io)** — front door.
-🤖 **Hermit** — the AI agent that ties it all together.
-🎬 **P.I.R.A.T.E.** — the media stack in the basement.
+🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 🤖 **Hermit** — the agent behind it all
 
-Hosted on a single Linux VPS behind Nginx + Tailscale, with everything orchestrated by an always-on AI agent so nothing stays broken for long.
+An always-on, self-hosted stack running on a single Linux VPS behind Nginx and Tailscale. Hermit keeps the services connected, watches the boring stuff, and fixes what it can before it becomes a problem.
 
 ---
 
@@ -39,20 +37,12 @@ Hosted on a single Linux VPS behind Nginx + Tailscale, with everything orchestra
 
 ---
 
-> 🎬 *[GIF SLOT — drop a quick screen-record of "Hermit, grab Daredevil" → show appears in FTV Media here]*
-
----
-
 ## 🌟 Featured
 
 | Project | Description | Stack |
 |---|---|---|
 | [**kxvn.io**](https://kxvn.io) | Click-to-enter splash page with audio, live Discord presence via Lanyard, Spotify now-playing, avatar decorations, mute controls, and Minecraft-style typography. The public front door for the whole stack. | Vanilla HTML/CSS/JS · Lanyard API · Nginx |
 | **Hermes** | AI agent framework that runs as one core across CLI, a multi-platform gateway (Discord, Telegram, WhatsApp, SMS, web dashboard), and ad-hoc shell sessions. Long-term memory via a personal knowledge graph, code awareness via a code-structure index, both connected through MCP. | Python · MCP · Ollama (local + cloud) · systemd |
-
-> 🎬 *[GIF SLOT — drop the "bot replies on Discord / Telegram / SMS / Voice" demo here]*
-
----
 
 ## 🛰️ Live Service Map (today)
 
