@@ -129,17 +129,21 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 
 ## 🌐 Public entry points
 
-The public project showcase intentionally exposes only the two canonical front doors:
+The public-facing links:
 
 | Public link | What it does |
 |---|---|
 | [kxvn.io](https://kxvn.io) | Public landing page and front door. |
+| [ftv.kxvn.io](https://ftv.kxvn.io) | FTV — the main media player. |
+| [kxvn.io/quicklinks](https://kxvn.io/quicklinks/) | **FTV Quick Stream** — public direct-watch links, tap any to start watching. |
+| [kxvn.io/cquicklinks](https://kxvn.io/cquicklinks/) | FTV Quick Stream (copy mode) — tap to copy a link to your clipboard. |
 | [docs.kxvn.io](https://docs.kxvn.io) | Public documentation hub, including the FTV Media guide. |
 
-Service endpoints, request tools, admin panels, and implementation details are kept out of this public README. Use the documentation hub for current user guidance.
+Admin panels, service endpoints, and implementation details are kept out of this public README. Use the documentation hub for current user guidance.
 
 ## Recent changes
 
+- **2026-09-18** — **FTV Quick Stream** launched: one-tap direct-watch pages for movies and episodes (`kxvn.io/<movie>/`, `kxvn.io/<series>/<S>/<E>/`), auto-generated from TMDB. Public listing at `kxvn.io/quicklinks` (+ clipboard-copy variant at `kxvn.io/cquicklinks`), both rebranded "FTV Quick Stream", collapsible per-season tabs, in-app-browser warning. Admin panel (behind auth) adds: hide/show toggles with optimistic UI, TMDB search with episode picker (add movies/shows by title or TMDB/IMDb id), TMDB info links to verify titles, and permanent delete mode (trash icon → multi-select → confirm). Bot's `/kxvn-list` merged into `/kxvn` with an autocomplete `type` option.
 - **2026-08-13** — Discord bot got a `/media` and `/stat` dashboard (movies · series · episodes + size on disk + last 3 added). Auto-delete-after-30s on every command except `/media` and `/stat` so the bot doesn't litter channels.
 - **2026-08-13** — `/collections` now shows live "X/Y in library" counts in search results (was just listing total movies).
 - **2026-08-15** — FTV Media account documentation synchronized across Silo, Jellyfin, Jellyseerr, Discord, and this showcase. Jellyseerr uses Jellyfin authentication; Silo and Jellyfin password changes mirror in both directions, and watch history stays synchronized.
