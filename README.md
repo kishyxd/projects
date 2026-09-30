@@ -30,10 +30,10 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 
 | System | Acronym | Stands For | What It Actually Is |
 |---|---|---|---|
-| **KXVN** | `K.X.V.N.` | **K**ishan's e**X**tended **V**irtual **N**exus | The whole stack — every domain, container, and service hanging off one point. |
-| **HERMIT** | `H.E.R.M.I.T.` | **H**ost-wide **E**xecution **R**unner — **M**onitoring, **I**nfrastructure & **T**asks | The agent layer — one core across every gateway, watching queues, fixing what breaks. |
+| **KXVN** | `K.X.V.N.` | **K**ishy's e**X**tended **V**irtual **N**etwork | The whole stack — every domain, container, and service hanging off one point. |
+| **HERMIT** | `H.E.R.M.I.T.` | **H**omelab **E**xecutive **R**esident — **M**ulti-platform **I**ntelligent **T**eammate | The AI agent & assistant — one core across every gateway, watching queues, running tasks, fixing what breaks. |
 | **VAULT** | `V.A.U.L.T.` | **V**ideo **A**cquisition & **U**nified **L**ibrary **T**ransport | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. It fetches, it stores, it serves. |
-| **SHELF** | `S.H.E.L.F.` | **S**elf-hosted **H**aven for **E**ntertainment, **L**iterature & **F**iles | The comics stack — Kavita, the signup bridge, and the download pipeline. It is literally a shelf. |
+| **SHELF** | `S.H.E.L.F.` | **S**elf-hosted **H**osting for **E**ntertainment, **L**iterature & **F**iles | The comics stack — Kavita, the signup bridge, and the download pipeline. It is literally a shelf. |
 
 *Composed by an insufferably truthful machine.* :3
 
