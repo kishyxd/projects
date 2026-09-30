@@ -26,13 +26,14 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 
 ## ⚙️ System Acronyms
 
-> Every project here ships with an over-engineered enterprise acronym, because a homelab with a codename feels 10% more legitimate. 😏
+> Every part of the stack carries an over-engineered enterprise acronym, because a homelab with a codename feels 10% more legitimate. 😏
 
 | System | Acronym | Stands For | What It Actually Is |
 |---|---|---|---|
-| **HERMIT** | `H.E.R.M.I.T.` | **H**ost-wide **E**xecution **R**unner — **M**onitoring, **I**nfrastructure & **T**asks | The core AI gateway, automation, and management layer tying the whole stack together. |
-| **PIRATE** | `P.I.R.A.T.E.` | **P**layback **I**nfrastructure & **R**elease **A**cquisition **T**ransport **E**ngine | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. |
-| **KOMIC** | `K.O.M.I.C.` | **K**avita **O**rchestrated **M**edia **I**ngestion & **C**atalogue | The comics stack — Kavita, the signup bridge, and the download pipeline that shelves anything it's handed. |
+| **KXVN** | `K.X.V.N.` | **K**ishan's e**X**tended **V**irtual **N**exus | The whole stack — every domain, container, and service hanging off one point. |
+| **HERMIT** | `H.E.R.M.I.T.` | **H**ost-wide **E**xecution **R**unner — **M**onitoring, **I**nfrastructure & **T**asks | The agent layer — one core across every gateway, watching queues, fixing what breaks. |
+| **VAULT** | `V.A.U.L.T.` | **V**ideo **A**cquisition & **U**nified **L**ibrary **T**ransport | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. It fetches, it stores, it serves. |
+| **SHELF** | `S.H.E.L.F.` | **S**elf-hosted **H**aven for **E**ntertainment, **L**iterature & **F**iles | The comics stack — Kavita, the signup bridge, and the download pipeline. It is literally a shelf. |
 
 *Composed by an insufferably truthful machine.* :3
 
@@ -49,7 +50,7 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 
 > Every container that actually answers the door. Grouped by what they do, not where their repo lives.
 
-### 🎬 Media — P.I.R.A.T.E.
+### 🎬 Media — V.A.U.L.T.
 
 | Container | What it does | Stack |
 |---|---|---|
@@ -62,7 +63,7 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 | **Jellyseerr** | Friend-facing request UI. TMDB-backed search + approval flow + auto-webhook back to "Available". | Jellyseerr · v3.4.1 · Docker |
 | **Tdarr** | Distributed transcode farm. One server + one worker, ready when a heavy batch comes through. | Tdarr · Docker |
 
-Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclone FUSE` mounted at `/home/ai/mnt/kxvn-b2`. Local disk only sees boot files and `~/.cache/rclone`.
+Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclone FUSE` mounted at `/home/ai/mnt/kxvn-b2`. Local disk only sees boot files and `~/.cache/rclone`. The whole media pipeline is **V.A.U.L.T.** — Video Acquisition & Unified Library Transport.
 
 ### 🧰 Productivity & Web
 
@@ -114,7 +115,7 @@ Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclo
                             │   - alerts via ntfy  │
                             └────────────┬─────────┘
                                          │
-   ┌──────────── P.I.R.A.T.E. ────────────┼──────────── Productivity ────────────┐
+   ┌──────────── V.A.U.L.T. ────────────────┼──────────── Productivity ────────────┐
    │                                     ▼                                        │
 Sonarr/Radarr ──► Prowlarr ──► SABnzbd / qBittorrent ──► /downloads/ → Sonarr/Radarr ──► import
    │                                                                      │
