@@ -2,7 +2,7 @@
 
 > **One VPS. Nine services. One agent that runs the show.**
 
-🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 🤖 **Hermit** — the agent behind it all
+🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 📖 **[comics.kxvn.io](https://comics.kxvn.io)** — comics & manga · 🤖 **Hermit** — the agent behind it all
 
 An always-on, self-hosted stack running on a single Linux VPS behind Nginx and Tailscale. Hermit keeps the services connected, watches the boring stuff, and fixes what it can before it becomes a problem.
 
@@ -43,6 +43,7 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 |---|---|---|
 | [**kxvn.io**](https://kxvn.io) | Click-to-enter splash page with audio, live Discord presence via Lanyard, Spotify now-playing, avatar decorations, mute controls, and Minecraft-style typography. The public front door for the whole stack. | Vanilla HTML/CSS/JS · Lanyard API · Nginx |
 | **Hermes** | AI agent framework that runs as one core across CLI, a multi-platform gateway (Discord, Telegram, WhatsApp, SMS, web dashboard), and ad-hoc shell sessions. Long-term memory via a personal knowledge graph, code awareness via a code-structure index, both connected through MCP. | Python · MCP · Ollama (local + cloud) · systemd |
+| [**comics.kxvn.io**](https://comics.kxvn.io) | Self-hosted comics + manga reader. Kavita on the laptop, nine series live (Invincible Compendium ×3, Jujutsu Kaisen ×31 volumes, Wolverine, Spidey TPBs). Self-serve signup page with on-page activation links + Discord webhook pings, OPDS feed for iOS Panels, and an agent-driven acquisition pipeline — send Hermit a getcomics.org link or a title in chat and it downloads, shelves, and scans automatically. Readable from any browser or the Panels app. | Kavita · Docker · Mylar3 · Flask signup bridge · OPDS |
 
 ## 🛰️ Live Service Map (today)
 
@@ -137,12 +138,14 @@ The public-facing links:
 | [ftv.kxvn.io](https://ftv.kxvn.io) | FTV — the main media player. |
 | [kxvn.io/quicklinks](https://kxvn.io/quicklinks/) | **FTV Quick Stream** — public direct-watch links, tap any to start watching. |
 | [kxvn.io/cquicklinks](https://kxvn.io/cquicklinks/) | FTV Quick Stream (copy mode) — tap to copy a link to your clipboard. |
+| [comics.kxvn.io](https://comics.kxvn.io) | Kavita — comics & manga reader ([signup](https://comics.kxvn.io/signup) for an account). |
 | [docs.kxvn.io](https://docs.kxvn.io) | Public documentation hub, including the FTV Media guide. |
 
 Admin panels, service endpoints, and implementation details are kept out of this public README. Use the documentation hub for current user guidance.
 
 ## Recent changes
 
+- **2026-09-30** — **KXVN Comics** launched (`comics.kxvn.io`): self-hosted Kavita comics + manga reader on the laptop with 9 series live (Invincible Compendium ×3, Jujutsu Kaisen ×31 volumes, Wolverine Old Man Logan, Spidey TPBs, Batman 1940, Akira, Sonic). Self-serve signup page at `/signup` (email → on-page activation link, no SMTP needed, Discord webhook pings on each signup), OPDS feed for iOS Panels, Mylar3 for comic automation, and an agent-driven acquisition pipeline — send Hermit a getcomics.org link or a manga title in any chat and it downloads, shelves, and scans automatically.
 - **2026-09-18** — **FTV Quick Stream** launched: one-tap direct-watch pages for movies and episodes (`kxvn.io/<movie>/`, `kxvn.io/<series>/<S>/<E>/`), auto-generated from TMDB. Public listing at `kxvn.io/quicklinks` (+ clipboard-copy variant at `kxvn.io/cquicklinks`), both rebranded "FTV Quick Stream", collapsible per-season tabs, in-app-browser warning. Admin panel (behind auth) adds: hide/show toggles with optimistic UI, TMDB search with episode picker (add movies/shows by title or TMDB/IMDb id), TMDB info links to verify titles, and permanent delete mode (trash icon → multi-select → confirm). Bot's `/kxvn-list` merged into `/kxvn` with an autocomplete `type` option.
 - **2026-08-13** — Discord bot got a `/media` and `/stat` dashboard (movies · series · episodes + size on disk + last 3 added). Auto-delete-after-30s on every command except `/media` and `/stat` so the bot doesn't litter channels.
 - **2026-08-13** — `/collections` now shows live "X/Y in library" counts in search results (was just listing total movies).
