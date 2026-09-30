@@ -26,12 +26,13 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 
 ## ⚙️ System Acronyms
 
-> Every project here ships with a corporate-sounding acronym so it sounds like a Fortune 500 product, not a homelab. 😏
+> Every project here ships with an over-engineered enterprise acronym, because a homelab with a codename feels 10% more legitimate. 😏
 
 | System | Acronym | Stands For | What It Actually Is |
 |---|---|---|---|
-| **HERMIT** | `H.E.R.M.I.T.` | **H**ome **E**fficient **R**esearch **M**anagement & **I**nformation **T**ransit | The core AI gateway, automation, and management layer tying the whole stack together. |
-| **PIRATE** | `P.I.R.A.T.E.` | **P**erfectly **I**ntegrated **R**epository for **A**ll **T**he **E**ntertainment | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. "Perfectly legal." 🤫 |
+| **HERMIT** | `H.E.R.M.I.T.` | **H**ost-wide **E**xecution **R**unner — **M**onitoring, **I**nfrastructure & **T**asks | The core AI gateway, automation, and management layer tying the whole stack together. |
+| **PIRATE** | `P.I.R.A.T.E.` | **P**layback **I**nfrastructure & **R**elease **A**cquisition **T**ransport **E**ngine | The media stack — Sonarr, Radarr, SABnzbd, Jellyfin, Prowlarr, qBittorrent, Jellyseerr. |
+| **KOMIC** | `K.O.M.I.C.` | **K**avita **O**rchestrated **M**edia **I**ngestion & **C**atalogue | The comics stack — Kavita, the signup bridge, and the download pipeline that shelves anything it's handed. |
 
 *Composed by an insufferably truthful machine.* :3
 
@@ -43,7 +44,6 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 |---|---|---|
 | [**kxvn.io**](https://kxvn.io) | Click-to-enter splash page with audio, live Discord presence via Lanyard, Spotify now-playing, avatar decorations, mute controls, and Minecraft-style typography. The public front door for the whole stack. | Vanilla HTML/CSS/JS · Lanyard API · Nginx |
 | **Hermes** | AI agent framework that runs as one core across CLI, a multi-platform gateway (Discord, Telegram, WhatsApp, SMS, web dashboard), and ad-hoc shell sessions. Long-term memory via a personal knowledge graph, code awareness via a code-structure index, both connected through MCP. | Python · MCP · Ollama (local + cloud) · systemd |
-| [**comics.kxvn.io**](https://comics.kxvn.io) | Self-hosted comics + manga reader. Kavita on the laptop, nine series live (Invincible Compendium ×3, Jujutsu Kaisen ×31 volumes, Wolverine, Spidey TPBs). Self-serve signup page with on-page activation links + Discord webhook pings, OPDS feed for iOS Panels, and an agent-driven acquisition pipeline — send Hermit a getcomics.org link or a title in chat and it downloads, shelves, and scans automatically. Readable from any browser or the Panels app. | Kavita · Docker · Mylar3 · Flask signup bridge · OPDS |
 
 ## 🛰️ Live Service Map (today)
 
