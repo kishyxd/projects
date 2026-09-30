@@ -2,7 +2,7 @@
 
 > **Two machines. One network. Twenty-plus services. One agent that runs the show.**
 
-🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 🎬 **[ftv.kxvn.io](https://ftv.kxvn.io)** — movies & TV · 📖 **[comics.kxvn.io](https://comics.kxvn.io)** — comics & manga · 📷 **[photos.kxvn.io](https://photos.kxvn.io)** — photos · 🤖 **Hermit** — the agent behind it all
+🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 🎬 **[ftv.kxvn.io](https://ftv.kxvn.io)** — movies & TV · 📖 **[comics.kxvn.io](https://comics.kxvn.io)** — comics & manga · 🤖 **Hermit** — the agent behind it all
 
 An always-on, self-hosted stack across a Linux VPS and a home laptop server, both on one Tailscale fabric behind Nginx. Hermit keeps the services connected, watches the boring stuff, and fixes what it can before it becomes a problem.
 
@@ -163,7 +163,6 @@ The showcase links below are all **safe to open** — no admin panels, no downlo
 | [ftv.kxvn.io](https://ftv.kxvn.io) | **FTV Media** — the main movies & TV player. |
 | [swipe.kxvn.io](https://swipe.kxvn.io) | Swipe — Tinder-style media browsing: swipe right on posters to queue them up. Login-gated, viewer-only. |
 | [comics.kxvn.io](https://comics.kxvn.io) | **Kavita** — comics & manga reader ([signup](https://comics.kxvn.io/signup) for an account). |
-| [photos.kxvn.io](https://photos.kxvn.io) | **Immich** — photo & video backup with ML search. Login required. |
 | [media.kxvn.io](https://media.kxvn.io) | Easy media streaming companion. |
 | [status.kxvn.io](https://status.kxvn.io) | Live service status page — what's up and what's not. |
 | [docs.kxvn.io](https://docs.kxvn.io) | Documentation hub, including the FTV Media guide. |
