@@ -1,10 +1,10 @@
 # 🛳 KXVN Projects
 
-> **One VPS. Nine services. One agent that runs the show.**
+> **Two machines. One network. Twenty-plus services. One agent that runs the show.**
 
-🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 📖 **[comics.kxvn.io](https://comics.kxvn.io)** — comics & manga · 🤖 **Hermit** — the agent behind it all
+🌐 **[kxvn.io](https://kxvn.io)** — front door · 📚 **[docs.kxvn.io](https://docs.kxvn.io)** — guides · 🎬 **[ftv.kxvn.io](https://ftv.kxvn.io)** — movies & TV · 📖 **[comics.kxvn.io](https://comics.kxvn.io)** — comics & manga · 📷 **[photos.kxvn.io](https://photos.kxvn.io)** — photos · 🤖 **Hermit** — the agent behind it all
 
-An always-on, self-hosted stack running on a single Linux VPS behind Nginx and Tailscale. Hermit keeps the services connected, watches the boring stuff, and fixes what it can before it becomes a problem.
+An always-on, self-hosted stack across a Linux VPS and a home laptop server, both on one Tailscale fabric behind Nginx. Hermit keeps the services connected, watches the boring stuff, and fixes what it can before it becomes a problem.
 
 ---
 
@@ -21,6 +21,18 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 | Tunables | Hermit restarts the rclone mount + the affected containers when the FUSE bind goes stale (it does, sometimes) |
 
 > *The whole stack is reads-against-warm-object-storage. Adding boxes adds SPOFs.*
+
+### 💻 The Second Box — g6 (home laptop server)
+
+| | |
+|---|---|
+| Hostname | `g6-server` |
+| CPU | Intel Core i7-13620H — 10 cores / 16 threads |
+| Memory | 14 GB DDR5 |
+| Storage | 817 GB free — local media/comics storage (no object storage hop) |
+| OS | Ubuntu with Hyprland (headless operation via SSH) |
+| Role | Comics & manga stack + Immich photo server |
+| Tunables | Watchtower keeps containers current on a nightly 05:00 UTC cycle |
 
 ---
 
@@ -64,6 +76,16 @@ An always-on, self-hosted stack running on a single Linux VPS behind Nginx and T
 | **Tdarr** | Distributed transcode farm. One server + one worker, ready when a heavy batch comes through. | Tdarr · Docker |
 
 Everything media-side talks to the **Wasabi hot bucket** (jellyv2kxvn) via `rclone FUSE` mounted at `/home/ai/mnt/kxvn-b2`. Local disk only sees boot files and `~/.cache/rclone`. The whole media pipeline is **V.A.U.L.T.** — Video Acquisition & Unified Library Transport.
+
+### 📚 Comics & Photos — S.H.E.L.F. (on g6)
+
+| Container | What it does |
+|---|---|
+| **Kavita** | Comics & manga server. 9 series live (Invincible Compendium ×3, Jujutsu Kaisen ×31 volumes, Wolverine Old Man Logan, Spider-Man TPBs, Batman 1940, Akira, Sonic). Serves the browser reader and the OPDS feed for iOS Panels. |
+| **Mylar3** | Comic series automation — watches wanted series, grabs new issues. Auth-protected. |
+| **Signup bridge** | Self-serve signup at `comics.kxvn.io/signup` — email in, activation link on-page, webhook ping on every signup. |
+| **Acquisition pipeline** | Agent-driven: getcomics link or a title in any chat → mirrors resolved → downloaded to `~/comics/library/` → Kavita scan → series live. Manga via MangaDex or torrent packs. |
+| **Immich** | Self-hosted photo & video backup. Mobile auto-upload, ML face/object search, shareable albums. |
 
 ### 🧰 Productivity & Web
 
@@ -131,16 +153,20 @@ Hermit sits on the same wire as every one of these. A "grab Daredevil" message b
 
 ## 🌐 Public entry points
 
-The public-facing links:
+The showcase links below are all **safe to open** — no admin panels, no downloaders, no backends. Everything else (Sonarr/Radarr/SAB endpoints, dashboards, monitors) stays unlisted on purpose.
 
 | Public link | What it does |
 |---|---|
-| [kxvn.io](https://kxvn.io) | Public landing page and front door. |
-| [ftv.kxvn.io](https://ftv.kxvn.io) | FTV — the main media player. |
-| [kxvn.io/quicklinks](https://kxvn.io/quicklinks/) | **FTV Quick Stream** — public direct-watch links, tap any to start watching. |
-| [kxvn.io/cquicklinks](https://kxvn.io/cquicklinks/) | FTV Quick Stream (copy mode) — tap to copy a link to your clipboard. |
-| [comics.kxvn.io](https://comics.kxvn.io) | Kavita — comics & manga reader ([signup](https://comics.kxvn.io/signup) for an account). |
-| [docs.kxvn.io](https://docs.kxvn.io) | Public documentation hub, including the FTV Media guide. |
+| [kxvn.io](https://kxvn.io) | Landing page — splash, Discord presence, Spotify now-playing. Front door. |
+| [kxvn.io/quicklinks](https://kxvn.io/quicklinks/) | **FTV Quick Stream** — one-tap direct-watch pages for every movie & episode, auto-generated from TMDB. |
+| [kxvn.io/cquicklinks](https://kxvn.io/cquicklinks/) | Same listing, tap-to-copy mode. |
+| [ftv.kxvn.io](https://ftv.kxvn.io) | **FTV Media** — the main movies & TV player. |
+| [swipe.kxvn.io](https://swipe.kxvn.io) | Swipe — Tinder-style media browsing: swipe right on posters to queue them up. Login-gated, viewer-only. |
+| [comics.kxvn.io](https://comics.kxvn.io) | **Kavita** — comics & manga reader ([signup](https://comics.kxvn.io/signup) for an account). |
+| [photos.kxvn.io](https://photos.kxvn.io) | **Immich** — photo & video backup with ML search. Login required. |
+| [media.kxvn.io](https://media.kxvn.io) | Easy media streaming companion. |
+| [status.kxvn.io](https://status.kxvn.io) | Live service status page — what's up and what's not. |
+| [docs.kxvn.io](https://docs.kxvn.io) | Documentation hub, including the FTV Media guide. |
 
 Admin panels, service endpoints, and implementation details are kept out of this public README. Use the documentation hub for current user guidance.
 
